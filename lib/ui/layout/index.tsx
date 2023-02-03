@@ -7,7 +7,7 @@ export const Layout = ({children} : {children: ReactNode}) => {
     const theme = useTheme()
 
     return (
-        <Box sx={{height: 'max'}}>
+        <Box sx={{background: theme.palette.background.default, color: theme.palette.text.primary, height: 'max', minHeight: '100%'}}>
             {children}
         </Box>
     )
