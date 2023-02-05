@@ -1,4 +1,4 @@
-import { Layout, THEME, themeWrapper } from "@/lib/ui";
+import { DrawerAppBar, Layout, THEME, themeWrapper } from "@/lib/ui";
 import "@/styles/globals.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -14,9 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={THEME}>
       <ThemeProvider theme={() => themeWrapper(isDarkTheme)}>
-        <Layout>
+        <DrawerAppBar isDarkTheme={isDarkTheme}>
           <Component {...pageProps} />
-        </Layout>
+        </DrawerAppBar>
       </ThemeProvider>
     </ThemeProvider>
   );

@@ -21,6 +21,9 @@ const darkTheme = createTheme({
         text: {
             primary: '#e3e3e3'
         }
+    },
+    breakpoints: {
+      
     }
 })
 
