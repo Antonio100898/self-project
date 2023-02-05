@@ -1,4 +1,4 @@
-import { DrawerAppBar, Layout, THEME, themeWrapper } from "@/lib/ui";
+import { Layout, THEME, themeRegular } from "@/lib/ui";
 import "@/styles/globals.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -9,14 +9,19 @@ import type { AppProps } from "next/app";
 import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  const themeToggle = () => {
+    if (isDarkTheme) setIsDarkTheme(false)
+    if (!isDarkTheme) setIsDarkTheme(true)
+  }
 
   return (
-    <ThemeProvider theme={THEME}>
-      <ThemeProvider theme={() => themeWrapper(isDarkTheme)}>
-        <DrawerAppBar isDarkTheme={isDarkTheme}>
+    <ThemeProvider theme={themeRegular}>
+      <ThemeProvider theme={() => THEME(isDarkTheme)}>
+        <Layout themeToggle={themeToggle} isDarkTheme={isDarkTheme}>
           <Component {...pageProps} />
-        </DrawerAppBar>
+        </Layout>
       </ThemeProvider>
     </ThemeProvider>
   );

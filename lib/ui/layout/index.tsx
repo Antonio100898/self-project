@@ -11,57 +11,56 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
+import Switch from "@mui/material/Switch";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { appBarHeight } from "../theme";
 
 type Props = {
   children: ReactNode;
   isDarkTheme: boolean;
-};
-export const Layout = (props: Props) => {
-  const { children, isDarkTheme } = props;
-  const theme = useTheme();
-
-  return (
-    <Box
-      sx={{
-        background: theme.palette.background.default,
-        color: theme.palette.text.primary,
-        height: "max",
-        minHeight: "100%",
-      }}
-    >
-      {children}
-    </Box>
-  );
+  themeToggle: () => void;
 };
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Contact"];
 
-export function DrawerAppBar(props: Props) {
+export function Layout(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { children, isDarkTheme } = props;
+  const { children, isDarkTheme, themeToggle } = props;
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
+    <Box sx={{ textAlign: "center" }}>
+      <Box sx={{ height: appBarHeight, alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="h6">MUI</Typography>
+      </Box>
       <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: 400,
+        }}
+      >
+        <List>
+          {navItems.map((item) => (
+            <ListItem key={item} disablePadding>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <ListItem sx={{ justifyContent: "center" }} disablePadding>
+          <DarkModeIcon /> <Switch onChange={themeToggle} />
+        </ListItem>
+      </Box>
     </Box>
   );
   const theme = useTheme();
@@ -82,7 +81,7 @@ export function DrawerAppBar(props: Props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-           <MenuIcon/>
+            <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
