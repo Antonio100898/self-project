@@ -1,23 +1,16 @@
 import { Box, useTheme } from "@mui/material";
 import { ReactNode, useState } from "react";
 import AppBar from "@mui/material/AppBar";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
-import Switch from "@mui/material/Switch";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { appBarHeight, black, tan } from "../theme";
+import { appBarHeight, black} from "../theme";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import Link from "next/link";
-import CloseIcon from "@mui/icons-material/Close";
 import { AppDrawer } from "../drawer";
 
 type Props = {
@@ -35,16 +28,16 @@ export type NavItems = {
 
 const navItems = [
   {
-    label: "Top",
-    href: "#top",
+    label: "Music",
+    href: "#music",
   },
   {
-    label: "Mid",
-    href: "#mid",
+    label: "Events",
+    href: "#events",
   },
   {
-    label: "Bot",
-    href: "#bot",
+    label: "Contact",
+    href: "#contact",
   },
 ];
 
@@ -110,7 +103,7 @@ export function Layout(props: Props) {
                   }}
                   href={item.href}
                 >
-                  <Button key={item.label} sx={{ color: black, fontSize: 18 }}>
+                  <Button key={item.label} sx={{ color: black, fontSize: 18, letterSpacing: 2 }}>
                     {item.label}
                   </Button>
                 </Link>
@@ -144,8 +137,8 @@ export function Layout(props: Props) {
           themeToggle={themeToggle}
         />
       </Drawer>
-      <Box component="main" sx={{ p: "0 4%", fontFamily: "roboto" }}>
-        <Toolbar />
+      <Box component="main" sx={{ p: "0 4%", fontFamily: "roboto"}}>
+        <Toolbar/>
         {children}
       </Box>
     </Box>

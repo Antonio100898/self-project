@@ -32,8 +32,8 @@ export const THEME = (dark: boolean) => {
       MuiToolbar: {
         styleOverrides: {
           root: {
-            heigth: appBarHeight,
-            padding: "0 4% !important" 
+            padding: "0 4% !important",
+            minHeight: 64
           }
         }
       },

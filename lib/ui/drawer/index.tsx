@@ -10,12 +10,13 @@ import LightModeIcon from "@mui/icons-material/LightModeRounded";
 import DarkModeIcon from "@mui/icons-material/DarkModeRounded";
 import Link from "next/link";
 import { NavItems } from "../layout";
+import { classes } from "@/styles/classes";
 
 type Props = {
   navItems: NavItems;
   isDarkTheme: boolean;
   themeToggle: () => void;
-  handleDrawerToggle: () => void
+  handleDrawerToggle: () => void;
 };
 
 export const AppDrawer = (props: Props) => {
@@ -25,28 +26,22 @@ export const AppDrawer = (props: Props) => {
 
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Box
-        sx={{
-          height: appBarHeight,
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          position: 'relative'
-        }}
-      >
+      <Box sx={classes.drawerHead}>
         <Typography variant="h6">Menu</Typography>
-        <IconButton sx={{position: 'absolute', right: 2, color: isDarkTheme? tan : black}} onClick={handleDrawerToggle}>
+        <IconButton
+          sx={{
+            position: "absolute",
+            right: 2,
+            color: isDarkTheme ? tan : black,
+          }}
+          onClick={handleDrawerToggle}
+        >
           <CloseIcon />
         </IconButton>
       </Box>
       <Divider />
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: 400,
-        }}
+        sx={classes.drawerBody}
       >
         <List>
           {navItems.map((item) => (
@@ -59,14 +54,14 @@ export const AppDrawer = (props: Props) => {
               passHref
             >
               <ListItem key={item.label} disablePadding>
-                <ListItemButton sx={{ textAlign: "center" }}>
-                  <ListItemText primary={item.label} />
+                <ListItemButton sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Typography letterSpacing={2}>{item.label}</Typography>
                 </ListItemButton>
               </ListItem>
             </Link>
           ))}
         </List>
-        <Box>
+        <Box >
           <Divider sx={{ mb: 4 }} />
           <ListItem sx={{ justifyContent: "center" }} disablePadding>
             <LightModeIcon
