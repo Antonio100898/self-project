@@ -1,9 +1,16 @@
-import { Typography, Paper } from "@mui/material";
 
 export default function Home() {
   return (
     <>
-      <Typography variant="h1">hpme</Typography>
+      <section className="section" id="top">
+        PERSONAL PAGE
+      </section>
+      <section className="section" id="mid">
+        mid
+      </section>
+      <section className="section" id="bot">
+        bot
+      </section>
     </>
   );
 }

@@ -14,7 +14,11 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import Switch from "@mui/material/Switch";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { appBarHeight } from "../theme";
+import { appBarHeight, black, tan } from "../theme";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import Link from "next/link";
+import CloseIcon from "@mui/icons-material/Close";
+import { AppDrawer } from "../drawer";
 
 type Props = {
   children: ReactNode;
@@ -23,55 +27,45 @@ type Props = {
 };
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+
+export type NavItems = {
+  label: string;
+  href: string;
+}[];
+
+const navItems = [
+  {
+    label: "Top",
+    href: "#top",
+  },
+  {
+    label: "Mid",
+    href: "#mid",
+  },
+  {
+    label: "Bot",
+    href: "#bot",
+  },
+];
 
 export function Layout(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const { children, isDarkTheme, themeToggle } = props;
 
+  const theme = useTheme();
+
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const drawer = (
-    <Box sx={{ textAlign: "center" }}>
-      <Box sx={{ height: appBarHeight, alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="h6">MUI</Typography>
-      </Box>
-      <Divider />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: 400,
-        }}
-      >
-        <List>
-          {navItems.map((item) => (
-            <ListItem key={item} disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={item} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <ListItem sx={{ justifyContent: "center" }} disablePadding>
-          <DarkModeIcon /> <Switch onChange={themeToggle} />
-        </ListItem>
-      </Box>
-    </Box>
-  );
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
-        background: theme.palette.background.default,
+        minHeight: "100vh",
+        height: "fit-content",
         color: theme.palette.text.primary,
-        height: "max",
-        minHeight: "100%",
+        background: theme.palette.background.default,
         display: "flex",
       }}
     >
@@ -84,41 +78,73 @@ export function Layout(props: Props) {
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
+            variant="h4"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{
+              minWidth: "fit-content",
+              flexGrow: 1,
+              color: black,
+              fontSize: { xs: 22, lg: 28 },
+              fontWeight: "bold",
+            }}
           >
-            MUI
+            PERSONAL PAGE
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
-            ))}
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                sm: "flex",
+                justifyContent: "space-between",
+                width: "70%",
+                paddingLeft: 100,
+              },
+            }}
+          >
+            <Box sx={{ display: "flex" }}>
+              {navItems.map((item) => (
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: theme.palette.text.primary,
+                  }}
+                  href={item.href}
+                >
+                  <Button key={item.label} sx={{ color: black, fontSize: 18 }}>
+                    {item.label}
+                  </Button>
+                </Link>
+              ))}
+            </Box>
+            <IconButton onClick={themeToggle}>
+              {isDarkTheme ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
-      <Box component="nav">
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box component="main" sx={{ p: 3 }}>
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: "block", sm: "none" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: drawerWidth,
+          },
+        }}
+      >
+        <AppDrawer
+          handleDrawerToggle={handleDrawerToggle}
+          isDarkTheme={isDarkTheme}
+          navItems={navItems}
+          themeToggle={themeToggle}
+        />
+      </Drawer>
+      <Box component="main" sx={{ p: "0 4%", fontFamily: "roboto" }}>
         <Toolbar />
         {children}
       </Box>
