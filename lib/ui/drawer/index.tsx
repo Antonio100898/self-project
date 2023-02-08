@@ -1,8 +1,7 @@
-import { appBarHeight, black, tan, white } from "../theme";
+import { black, tan } from "../theme";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import { Box, Divider, IconButton, Switch, useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
@@ -40,9 +39,7 @@ export const AppDrawer = (props: Props) => {
         </IconButton>
       </Box>
       <Divider />
-      <Box
-        sx={classes.drawerBody}
-      >
+      <Box sx={classes.drawerBody}>
         <List>
           {navItems.map((item) => (
             <Link
@@ -54,14 +51,16 @@ export const AppDrawer = (props: Props) => {
               passHref
             >
               <ListItem key={item.label} disablePadding>
-                <ListItemButton sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Typography letterSpacing={2}>{item.label}</Typography>
+                <ListItemButton
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Typography letterSpacing={2}>{item.label}</Typography>
                 </ListItemButton>
               </ListItem>
             </Link>
           ))}
         </List>
-        <Box >
+        <Box>
           <Divider sx={{ mb: 4 }} />
           <ListItem sx={{ justifyContent: "center" }} disablePadding>
             <LightModeIcon

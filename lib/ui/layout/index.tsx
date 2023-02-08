@@ -8,10 +8,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { appBarHeight, black} from "../theme";
+import { black } from "../theme";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import Link from "next/link";
 import { AppDrawer } from "../drawer";
+import Link from "next/link";
 
 type Props = {
   children: ReactNode;
@@ -51,6 +51,12 @@ export function Layout(props: Props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const handleScroll = (event: any) => {
+    let anchorTarget = document.getElementById("contact")
+    event.preventDefault();
+    anchorTarget?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   return (
     <Box
@@ -97,13 +103,17 @@ export function Layout(props: Props) {
             <Box sx={{ display: "flex" }}>
               {navItems.map((item) => (
                 <Link
+                  onClick={handleScroll}
                   style={{
                     textDecoration: "none",
                     color: theme.palette.text.primary,
                   }}
                   href={item.href}
                 >
-                  <Button key={item.label} sx={{ color: black, fontSize: 18, letterSpacing: 2 }}>
+                  <Button
+                    key={item.label}
+                    sx={{ color: black, fontSize: 18, letterSpacing: 2 }}
+                  >
                     {item.label}
                   </Button>
                 </Link>
@@ -137,8 +147,11 @@ export function Layout(props: Props) {
           themeToggle={themeToggle}
         />
       </Drawer>
-      <Box component="main" sx={{ p: "0 4%", fontFamily: "roboto"}}>
-        <Toolbar/>
+      <Box
+        component="main"
+        sx={{ p: "0 4%", fontFamily: "roboto", width: "100%" }}
+      >
+        <Toolbar />
         {children}
       </Box>
     </Box>

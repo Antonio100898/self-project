@@ -9,6 +9,7 @@ body {
 }
 
 .section {
+  width: 100%;
   padding-top: 24px;
   height: 100vh;
   scroll-margin-top: 64px;

@@ -1,4 +1,4 @@
-import { appBarHeight } from "@/lib/ui";
+import { appBarHeight, beige, tan } from "@/lib/ui";
 
 export const classes = {
   drawerHead: {
@@ -13,5 +13,13 @@ export const classes = {
     flexDirection: "column",
     justifyContent: "space-between",
     height: 400,
+  },
+  sectionHeader: {
+    textAlign: 'center',
+    letterSpacing: 2,
+    fontSize: 30,
+    color: tan,
+    fontWeight: 'bold',
+    mb: 2
   }
 };

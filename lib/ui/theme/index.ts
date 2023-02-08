@@ -5,6 +5,8 @@ export const black = "#454545";
 export const tan = "#E0A96D";
 export const white = "#e3e3e3";
 export const grey = "#878787";
+export const paperColorDark = "#696969" 
+export const paperColorLight = '#ebebeb'
 export const appBarHeight = 60;
 
 export const themeRegular = createTheme({});
@@ -13,12 +15,11 @@ export const THEME = (dark: boolean) => {
     palette: {
       background: {
         default: dark ? black : white,
-        paper: "#696969",
+        paper: dark? paperColorDark : paperColorLight,
       },
       text: {
         primary: dark ? white : black,
       },
-
     },
     components: {
       MuiAppBar: {
@@ -33,9 +34,9 @@ export const THEME = (dark: boolean) => {
         styleOverrides: {
           root: {
             padding: "0 4% !important",
-            minHeight: 64
-          }
-        }
+            minHeight: 64,
+          },
+        },
       },
       MuiDrawer: {
         styleOverrides: {
