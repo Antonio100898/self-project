@@ -21,7 +21,13 @@ type Props = {
 export const AppDrawer = (props: Props) => {
   const { navItems, isDarkTheme, themeToggle, handleDrawerToggle } = props;
 
-  const theme = useTheme();
+  const onClick = (route: string) => {
+    const doc = document.getElementById(route);
+    if (doc) {
+      window.scrollTo({top: doc.offsetTop - 70, behavior:'smooth'});
+      handleDrawerToggle();
+    }
+  }
 
   return (
     <Box sx={{ textAlign: "center" }}>
@@ -42,22 +48,13 @@ export const AppDrawer = (props: Props) => {
       <Box sx={classes.drawerBody}>
         <List>
           {navItems.map((item) => (
-            <Link
-              style={{
-                textDecoration: "none",
-                color: theme.palette.text.primary,
-              }}
-              href={item.href}
-              passHref
-            >
-              <ListItem key={item.label} disablePadding>
+              <ListItem onClick={() => onClick(item.href)} key={item.label} disablePadding>
                 <ListItemButton
                   sx={{ display: "flex", justifyContent: "center" }}
                 >
                   <Typography letterSpacing={2}>{item.label}</Typography>
                 </ListItemButton>
               </ListItem>
-            </Link>
           ))}
         </List>
         <Box>

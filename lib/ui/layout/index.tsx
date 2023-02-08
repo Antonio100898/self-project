@@ -29,15 +29,15 @@ export type NavItems = {
 const navItems = [
   {
     label: "Music",
-    href: "#music",
+    href: "music",
   },
   {
     label: "Events",
-    href: "#events",
+    href: "events",
   },
   {
     label: "Contact",
-    href: "#contact",
+    href: "contact",
   },
 ];
 
