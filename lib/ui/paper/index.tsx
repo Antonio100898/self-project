@@ -1,6 +1,15 @@
-import {  Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import { ReactNode } from "react";
 
-export const AppPaper = ({children}: {children: ReactNode}) => {
-  return <Paper sx={{padding: 2}}>{children}</Paper>
-}
+type Props = {
+  children: ReactNode;
+  sx?: object;
+};
+
+export const AppPaper = ({ children, sx }: Props) => {
+  return (
+    <Paper sx={{ padding: 2, ...sx }}>
+      {children}
+    </Paper>
+  );
+};

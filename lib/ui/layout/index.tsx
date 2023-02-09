@@ -8,10 +8,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { black } from "../theme";
+import { black, grey } from "../theme";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { AppDrawer } from "../drawer";
-import Link from "next/link";
+import HeadphonesRoundedIcon from "@mui/icons-material/HeadphonesRounded";
+import NightlifeRoundedIcon from "@mui/icons-material/NightlifeRounded";
+import Image from "next/image";
 
 type Props = {
   children: ReactNode;
@@ -24,20 +26,31 @@ const drawerWidth = 240;
 export type NavItems = {
   label: string;
   href: string;
+  icon: ReactNode
 }[];
 
 const navItems = [
   {
     label: "Music",
     href: "music",
+    icon: <HeadphonesRoundedIcon />,
   },
   {
     label: "Events",
     href: "events",
+    icon: <NightlifeRoundedIcon />,
   },
   {
     label: "Contact",
     href: "contact",
+    icon: (
+      <Image
+        src="/social-media.png"
+        alt="social-media_icon"
+        width={30}
+        height={30}
+      />
+    ),
   },
 ];
 
@@ -52,11 +65,12 @@ export function Layout(props: Props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const handleScroll = (event: any) => {
-    let anchorTarget = document.getElementById("contact")
-    event.preventDefault();
-    anchorTarget?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  const onNavClick = (route: string) => {
+    const doc = document.getElementById(route);
+    if (doc) {
+      window.scrollTo({ top: doc.offsetTop - 50, behavior: "smooth" });
+    }
+  };
 
   return (
     <Box
@@ -96,27 +110,25 @@ export function Layout(props: Props) {
                 sm: "flex",
                 justifyContent: "space-between",
                 width: "70%",
-                paddingLeft: 100,
               },
             }}
           >
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", gap: {md: 1} }}>
               {navItems.map((item) => (
-                <Link
-                  onClick={handleScroll}
-                  style={{
-                    textDecoration: "none",
-                    color: theme.palette.text.primary,
+                <IconButton
+                  onClick={() => onNavClick(item.href)}
+                  key={item.label}
+                  sx={{
+                    color: black,
+                    fontSize: 18,
+                    letterSpacing: 2,
+                    height: '100%',
+                    gap: {s: 0.8 ,md: 1}
                   }}
-                  href={item.href}
                 >
-                  <Button
-                    key={item.label}
-                    sx={{ color: black, fontSize: 18, letterSpacing: 2 }}
-                  >
-                    {item.label}
-                  </Button>
-                </Link>
+                  {item.icon}
+                 <Box sx={{textAlign: 'center'}}>{item.label}</Box>
+                </IconButton>
               ))}
             </Box>
             <IconButton onClick={themeToggle}>
@@ -141,6 +153,7 @@ export function Layout(props: Props) {
         }}
       >
         <AppDrawer
+          onNavClick={onNavClick}
           handleDrawerToggle={handleDrawerToggle}
           isDarkTheme={isDarkTheme}
           navItems={navItems}
@@ -148,11 +161,18 @@ export function Layout(props: Props) {
         />
       </Drawer>
       <Box
-        component="main"
-        sx={{ p: "0 4%", fontFamily: "roboto", width: "100%" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          p: "0 4%",
+          fontFamily: "roboto",
+        }}
       >
-        <Toolbar />
-        {children}
+        <Box component="main">
+          <Toolbar />
+          {children}
+        </Box>
+        <Box>FOOTER</Box>
       </Box>
     </Box>
   );

@@ -11,7 +11,8 @@ body {
 .section {
   width: 100%;
   padding-top: 24px;
-  height: 100vh;
+  min-height: 90vh;
   scroll-margin-top: 64px;
   scroll-behavior: smooth;
+  position: relative;
 }

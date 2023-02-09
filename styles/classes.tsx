@@ -12,7 +12,6 @@ export const classes = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    height: 400,
   },
   sectionHeader: {
     textAlign: 'center',
