@@ -5,10 +5,9 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { black, grey } from "../theme";
+import { black } from "../theme";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { AppDrawer } from "../drawer";
 import HeadphonesRoundedIcon from "@mui/icons-material/HeadphonesRounded";
@@ -26,7 +25,7 @@ const drawerWidth = 240;
 export type NavItems = {
   label: string;
   href: string;
-  icon: ReactNode
+  icon: ReactNode;
 }[];
 
 const navItems = [
@@ -113,7 +112,7 @@ export function Layout(props: Props) {
               },
             }}
           >
-            <Box sx={{ display: "flex", gap: {md: 1} }}>
+            <Box sx={{ display: "flex", gap: { md: 1 } }}>
               {navItems.map((item) => (
                 <IconButton
                   onClick={() => onNavClick(item.href)}
@@ -122,12 +121,12 @@ export function Layout(props: Props) {
                     color: black,
                     fontSize: 18,
                     letterSpacing: 2,
-                    height: '100%',
-                    gap: {s: 0.8 ,md: 1}
+                    height: "100%",
+                    gap: { s: 0.8, md: 1 },
                   }}
                 >
                   {item.icon}
-                 <Box sx={{textAlign: 'center'}}>{item.label}</Box>
+                  <Box sx={{ textAlign: "center" }}>{item.label}</Box>
                 </IconButton>
               ))}
             </Box>

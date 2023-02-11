@@ -2,13 +2,28 @@ import { AppPaper } from "@/lib/ui";
 import { AppSection } from "@/lib/ui/section";
 import { List, ListItemIcon, ListItemText } from "@mui/material";
 import Image from "next/image";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import ListItem from "@mui/material/ListItem";
+import { useEffect } from "react";
 
-export default function Home() {
+export async function getServerSideProps() {
+  let res = await fetch("http://localhost:3000/api/hello", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let allUsers = await res.json();
+
+  return {
+    props: { allUsers },
+  };
+}
+
+export default function Home(props: { allUsers: any }) {
   const contactLinks = [];
-
+  useEffect(() => {
+    console.log(props);
+  }, [props]);
   return (
     <>
       <AppSection header="MUSIC" id="music">
