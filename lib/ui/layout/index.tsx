@@ -22,11 +22,6 @@ type Props = {
 
 const drawerWidth = 240;
 
-export type NavItems = {
-  label: string;
-  href: string;
-  icon: ReactNode;
-}[];
 
 const navItems = [
   {
@@ -123,6 +118,7 @@ export function Layout(props: Props) {
                     letterSpacing: 2,
                     height: "100%",
                     gap: { s: 0.8, md: 1 },
+                    borderRadius: 2
                   }}
                 >
                   {item.icon}

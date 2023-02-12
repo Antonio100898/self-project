@@ -10,6 +10,7 @@ export const paperColorLight = '#ebebeb'
 export const appBarHeight = 60;
 
 export const themeRegular = createTheme({});
+
 export const THEME = (dark: boolean) => {
   return createTheme({
     palette: {

@@ -1,4 +1,4 @@
-import { black, tan } from "../theme";
+import { black, tan, white } from "../theme";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,11 +14,11 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import LightModeIcon from "@mui/icons-material/LightModeRounded";
 import DarkModeIcon from "@mui/icons-material/DarkModeRounded";
-import { NavItems } from "../layout";
 import { classes } from "@/styles/classes";
+import { NavItem } from "@/lib/api/models";
 
 type Props = {
-  navItems: NavItems;
+  navItems: NavItem[];
   isDarkTheme: boolean;
   themeToggle: () => void;
   handleDrawerToggle: () => void;
@@ -61,8 +61,8 @@ export const AppDrawer = ({
               key={item.label}
               disablePadding
             >
-              <ListItemButton sx={{height: 70}}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemButton sx={{ height: 70 }}>
+                <ListItemIcon sx={{color: isDarkTheme? tan : black}} >{item.icon}</ListItemIcon>
                 <ListItemText>
                   <Typography letterSpacing={2}>{item.label}</Typography>
                 </ListItemText>
