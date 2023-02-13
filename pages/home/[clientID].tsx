@@ -5,23 +5,28 @@ import Image from "next/image";
 import ListItem from "@mui/material/ListItem";
 import { useState } from "react";
 import { ThemeProvider } from "@mui/material";
+import { ApiService } from "@/lib/api/api-service";
 
 export async function getServerSideProps({ query }: any) {
+  const api = new ApiService();
   
-  let res = await fetch(`http://localhost:3000/api/user-data/${query.clientID}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  let data = await res.json();
+   const response = api.fetchUserById(query.clientID);
+  
+  if (response?.status === 404) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: "/404",
+      },
+    };
+  }
 
   return {
-    props: { data },
+    props: { userData: response?.data },
   };
 }
 
-export default function Home(props: { data: any }) {
+export default function Home(props: { userData: any }) {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const themeToggle = () => {
