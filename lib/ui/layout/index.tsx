@@ -10,48 +10,21 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { black } from "../theme";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { AppDrawer } from "../drawer";
-import HeadphonesRoundedIcon from "@mui/icons-material/HeadphonesRounded";
-import NightlifeRoundedIcon from "@mui/icons-material/NightlifeRounded";
-import Image from "next/image";
+import Button from "@mui/material/Button";
+import { NavItem } from "@/lib/api/models";
 
 type Props = {
   children: ReactNode;
   isDarkTheme: boolean;
   themeToggle: () => void;
+  navItems?: NavItem[] | null;
+  name?: string
 };
-
-const drawerWidth = 240;
-
-
-const navItems = [
-  {
-    label: "Music",
-    href: "music",
-    icon: <HeadphonesRoundedIcon />,
-  },
-  {
-    label: "Events",
-    href: "events",
-    icon: <NightlifeRoundedIcon />,
-  },
-  {
-    label: "Contact",
-    href: "contact",
-    icon: (
-      <Image
-        src="/social-media.png"
-        alt="social-media_icon"
-        width={30}
-        height={30}
-      />
-    ),
-  },
-];
 
 export function Layout(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { children, isDarkTheme, themeToggle } = props;
+  const { children, isDarkTheme, themeToggle, navItems, name } = props;
 
   const theme = useTheme();
 
@@ -95,7 +68,7 @@ export function Layout(props: Props) {
               fontWeight: "bold",
             }}
           >
-            PERSONAL PAGE
+            {name}
           </Typography>
           <Box
             sx={{
@@ -108,8 +81,8 @@ export function Layout(props: Props) {
             }}
           >
             <Box sx={{ display: "flex", gap: { md: 1 } }}>
-              {navItems.map((item) => (
-                <IconButton
+              {navItems?.map((item) => (
+                <Button
                   onClick={() => onNavClick(item.href)}
                   key={item.label}
                   sx={{
@@ -118,12 +91,11 @@ export function Layout(props: Props) {
                     letterSpacing: 2,
                     height: "100%",
                     gap: { s: 0.8, md: 1 },
-                    borderRadius: 2
+                    borderRadius: 2,
                   }}
                 >
-                  {item.icon}
-                  <Box sx={{ textAlign: "center" }}>{item.label}</Box>
-                </IconButton>
+                  {item.label}
+                </Button>
               ))}
             </Box>
             <IconButton onClick={themeToggle}>
@@ -141,10 +113,6 @@ export function Layout(props: Props) {
         }}
         sx={{
           display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: drawerWidth,
-          },
         }}
       >
         <AppDrawer
@@ -161,7 +129,7 @@ export function Layout(props: Props) {
           flexDirection: "column",
           p: "0 4%",
           fontFamily: "roboto",
-          width: '100%'
+          width: "100%",
         }}
       >
         <Box component="main">

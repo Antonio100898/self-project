@@ -1,4 +1,4 @@
-import { black, tan, white } from "../theme";
+import { black, white } from "../theme";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -6,7 +6,6 @@ import {
   Box,
   Divider,
   IconButton,
-  ListItemIcon,
   Switch,
   ListItemText,
 } from "@mui/material";
@@ -18,7 +17,7 @@ import { classes } from "@/styles/classes";
 import { NavItem } from "@/lib/api/models";
 
 type Props = {
-  navItems: NavItem[];
+  navItems?: NavItem[] | null;
   isDarkTheme: boolean;
   themeToggle: () => void;
   handleDrawerToggle: () => void;
@@ -32,6 +31,7 @@ export const AppDrawer = ({
   handleDrawerToggle,
   onNavClick,
 }: Props) => {
+
   const onDrawerNavClick = (route: string) => {
     onNavClick(route);
     handleDrawerToggle();
@@ -45,7 +45,7 @@ export const AppDrawer = ({
           sx={{
             position: "absolute",
             right: 2,
-            color: isDarkTheme ? tan : black,
+            color: isDarkTheme ? white : black,
           }}
           onClick={handleDrawerToggle}
         >
@@ -55,14 +55,13 @@ export const AppDrawer = ({
       <Divider />
       <Box sx={classes.drawerBody}>
         <List>
-          {navItems.map((item) => (
+          {navItems?.map((item) => (
             <ListItem
               onClick={() => onDrawerNavClick(item.href)}
               key={item.label}
               disablePadding
             >
-              <ListItemButton sx={{ height: 70 }}>
-                <ListItemIcon sx={{color: isDarkTheme? tan : black}} >{item.icon}</ListItemIcon>
+              <ListItemButton sx={{ height: 70, textAlign: 'center' }}>
                 <ListItemText>
                   <Typography letterSpacing={2}>{item.label}</Typography>
                 </ListItemText>

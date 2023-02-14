@@ -20,13 +20,14 @@ export async function getServerSideProps({ query }: any) {
       },
     };
   }
+  // if response.data.data exists so we put this to props of the page
   return {
     props: {
       userData: {
         userInfo: response?.data.data.userInfo,
         userWebData: response?.data.data.userWebData,
       },
-    }, // if response.data.data exists so we put this to props of the page
+    }, 
   };
 }
 
@@ -44,15 +45,14 @@ export default function Home(props: Props) {
   const [navItems, setNavItems] = useState<NavItem[] | null>(null);
   const [client, setClient] = useState<IUserInfo | null>(null);
 
-  //props destructuring
-
+  const { userInfo, userWebData } = props.userData;
+  
   useEffect(() => {
-    const { userInfo, userWebData } = props.userData;
     setClient(userInfo);
     setSections(userWebData.sections);
     setNavItems(userWebData.navItems);
   }, [props]);
-
+  
   //changing theme of the page (dark/light)
   const themeToggle = () => {
     if (isDarkTheme) setIsDarkTheme(false);
@@ -61,8 +61,8 @@ export default function Home(props: Props) {
 
   return (
     <ThemeProvider theme={themeRegular}>
-      <ThemeProvider theme={() => THEME(isDarkTheme)}>
-        <Layout themeToggle={themeToggle} isDarkTheme={isDarkTheme}>
+      <ThemeProvider theme={() => THEME(isDarkTheme, userWebData.palette.primaryColor)}>
+        <Layout name={client?.name} navItems={navItems} themeToggle={themeToggle} isDarkTheme={isDarkTheme}>
           {sections?.map((section) => (
             <AppSection
               header={section.header}

@@ -1,4 +1,4 @@
-import { appBarHeight, beige, tan } from "@/lib/ui";
+import { appBarHeight } from "@/lib/ui";
 
 export const classes = {
   drawerHead: {
@@ -17,7 +17,6 @@ export const classes = {
     textAlign: 'center',
     letterSpacing: 2,
     fontSize: 30,
-    color: tan,
     fontWeight: 'bold',
     mb: 2
   }

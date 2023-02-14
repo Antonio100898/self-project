@@ -1,25 +1,29 @@
 import { createTheme } from "@mui/material/styles";
 
-export const beige = "#DDC3A5";
 export const black = "#454545";
-export const tan = "#E0A96D";
 export const white = "#e3e3e3";
 export const grey = "#878787";
-export const paperColorDark = "#696969" 
-export const paperColorLight = '#ebebeb'
 export const appBarHeight = 60;
+export const drawerWidth = 240;
 
 export const themeRegular = createTheme({});
 
-export const THEME = (dark: boolean) => {
+export const THEME = (dark: boolean, primaryColor: string) => {
+  const tan = primaryColor;
+  const paperColorDark = "#696969";
+  const paperColorLight = "#ebebeb";
+
   return createTheme({
     palette: {
       background: {
         default: dark ? black : white,
-        paper: dark? paperColorDark : paperColorLight,
+        paper: dark ? paperColorDark : paperColorLight,
       },
       text: {
         primary: dark ? white : black,
+      },
+      primary: {
+        main: tan,
       },
     },
     components: {
@@ -42,14 +46,16 @@ export const THEME = (dark: boolean) => {
       MuiDrawer: {
         styleOverrides: {
           paper: {
-            backgroundColor: dark ? black : beige,
+            backgroundColor: dark ? black : white,
+            boxSizing: "border-box",
+            width: drawerWidth,
           },
         },
       },
       MuiDivider: {
         styleOverrides: {
           root: {
-            backgroundColor: dark ? tan : black,
+            backgroundColor: tan,
             padding: 0,
             margin: 0,
           },

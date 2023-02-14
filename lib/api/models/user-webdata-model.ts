@@ -2,6 +2,9 @@
 export interface IUserWebData {
   navItems: NavItem[];
   sections: Section[];
+  palette: {
+    primaryColor: string
+  }
 }
 
 export type NavItem = {
