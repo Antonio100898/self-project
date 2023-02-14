@@ -161,6 +161,7 @@ export function Layout(props: Props) {
           flexDirection: "column",
           p: "0 4%",
           fontFamily: "roboto",
+          width: '100%'
         }}
       >
         <Box component="main">

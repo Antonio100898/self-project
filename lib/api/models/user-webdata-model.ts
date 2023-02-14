@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 
 export interface IUserWebData {
   navItems: NavItem[];
@@ -8,21 +7,20 @@ export interface IUserWebData {
 export type NavItem = {
   label: string;
   href: string;
-  icon: ReactNode;
 };
 
 export type Section = {
-  header: string;
-  content: {
-    paragraph: string;
-    media: {
-      images: {
+  header?: string;
+  content?: {
+    paragraph?: string;
+    media?: {
+      images?: {
         src: string;
-        description: string;
+        description?: string;
       }[];
-      videos: {
+      videos?: {
         src: string;
-        description: string;
+        description?: string;
       }[];
     };
   };

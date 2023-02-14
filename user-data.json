@@ -1,0 +1,46 @@
+{
+  "userInfo": {
+    "id": 1,
+    "name": "Anton Mishanin",
+    "age": 24,
+    "email": "anymy9813@gmail.com",
+    "phone": "0549082507",
+    "activity": "Developer"
+  },
+  "userWebData": {
+    "navItems": [
+      {
+        "label": "Music",
+        "href": "music"
+      },
+      {
+        "label": "Events",
+        "href": "events"
+      },
+      {
+        "label": "Contact",
+        "href": "contact"
+      }
+    ],
+    "sections": [
+      {
+        "header": "MUSIC",
+        "content": {
+          "paragraph": "paragraph of the MUSIC section"
+        }
+      },
+      {
+        "header": "EVENTS",
+        "content": {
+          "paragraph": "paragraph of the EVENTS section"
+        }
+      },
+      {
+        "header": "CONTACT",
+        "content": {
+          "paragraph": "paragraph of the CONTACT section"
+        }
+      }
+    ]
+  }
+}

@@ -3,16 +3,16 @@ import { AppSection } from "@/lib/ui/section";
 import { List, ListItemIcon, ListItemText } from "@mui/material";
 import Image from "next/image";
 import ListItem from "@mui/material/ListItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeProvider } from "@mui/material";
 import { ApiService } from "@/lib/api/api-service";
+import { IUserInfo, IUserWebData, NavItem, Section } from "@/lib/api/models";
 
 export async function getServerSideProps({ query }: any) {
-  const api = new ApiService();
-  
-   const response = api.fetchUserById(query.clientID);
-  
-  if (response?.status === 404) {
+  const response = await ApiService.fetchUserById(query.clientID); //initial request for the page of the user (by userid/username provided as query (query.clientID))
+
+  if (!response?.data.data) {
+    //if api service didnt return response.data.data, means that page of the provided user doesnt exist
     return {
       redirect: {
         permanent: true,
@@ -20,15 +20,40 @@ export async function getServerSideProps({ query }: any) {
       },
     };
   }
-
   return {
-    props: { userData: response?.data },
+    props: {
+      userData: {
+        userInfo: response?.data.data.userInfo,
+        userWebData: response?.data.data.userWebData,
+      },
+    }, // if response.data.data exists so we put this to props of the page
   };
 }
 
-export default function Home(props: { userData: any }) {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+type Props = {
+  userData: {
+    userInfo: IUserInfo;
+    userWebData: IUserWebData;
+  };
+};
 
+export default function Home(props: Props) {
+  //state of the app
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [sections, setSections] = useState<Section[] | null>(null);
+  const [navItems, setNavItems] = useState<NavItem[] | null>(null);
+  const [client, setClient] = useState<IUserInfo | null>(null);
+
+  //props destructuring
+
+  useEffect(() => {
+    const { userInfo, userWebData } = props.userData;
+    setClient(userInfo);
+    setSections(userWebData.sections);
+    setNavItems(userWebData.navItems);
+  }, [props]);
+
+  //changing theme of the page (dark/light)
   const themeToggle = () => {
     if (isDarkTheme) setIsDarkTheme(false);
     if (!isDarkTheme) setIsDarkTheme(true);
@@ -38,36 +63,14 @@ export default function Home(props: { userData: any }) {
     <ThemeProvider theme={themeRegular}>
       <ThemeProvider theme={() => THEME(isDarkTheme)}>
         <Layout themeToggle={themeToggle} isDarkTheme={isDarkTheme}>
-          <AppSection header="MUSIC" id="music">
-            <AppPaper>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
-              et ullam. Sunt, reprehenderit. Sunt, dolor hic doloremque optio
-              exercitationem commodi. Impedit, suscipit? Alias sit praesentium
-              saepe odio ducimus, iste tempore! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Consequuntur unde rerum, in
-              perspiciatis quam autem magnam? Ipsam dolorem quam sint architecto
-              labore recusandae sed? Ratione dolore harum error expedita iste.
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt
-              explicabo architecto nihil ipsa? Animi libero excepturi explicabo
-              fugit totam quibusdam, a molestias pariatur, quia voluptatibus
-              fugiat natus tempore sit ducimus.
-            </AppPaper>
-          </AppSection>
-          <AppSection header="EVENTS" id="events">
-            <AppPaper>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
-              et ullam. Sunt, reprehenderit. Sunt, dolor hic doloremque optio
-              exercitationem commodi. Impedit, suscipit? Alias sit praesentium
-              saepe odio ducimus, iste tempore! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Consequuntur unde rerum, in
-              perspiciatis quam autem magnam? Ipsam dolorem quam sint architecto
-              labore recusandae sed? Ratione dolore harum error expedita iste.
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt
-              explicabo architecto nihil ipsa? Animi libero excepturi explicabo
-              fugit totam quibusdam, a molestias pariatur, quia voluptatibus
-              fugiat natus tempore sit ducimus.
-            </AppPaper>
-          </AppSection>
+          {sections?.map((section) => (
+            <AppSection
+              header={section.header}
+              id={section.header?.toLowerCase()}
+            >
+              <AppPaper>{section.content?.paragraph}</AppPaper>
+            </AppSection>
+          ))}
           <AppSection header="CONTACT" id="contact">
             <AppPaper>
               <List>

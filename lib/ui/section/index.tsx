@@ -3,9 +3,9 @@ import { Box, Divider } from "@mui/material";
 import { ReactNode } from "react";
 
 type Props = {
-  header: string;
-  children: ReactNode;
-  id: string;
+  header?: string;
+  children?: ReactNode;
+  id?: string;
 };
 
 export const AppSection = (props: Props) => {

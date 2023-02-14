@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { UserDataResponse } from "../models/responses";
 
-export class ApiService {
-  constructor() {}
-
-  public async fetchUserById(id: number) {
-    let response 
+export const ApiService = {
+  async fetchUserById(id: number) {
     try {
-      response = axios.get(`http://localhost:3000/api/user-data/${id}`);
+      const response = await axios.get<AxiosResponse<UserDataResponse>>(
+        `http://localhost:3000/api/user-data/${id}`
+      );
+      return response;
     } catch (error) {
       console.log(error);
     }
-     return response
-  }
-}
+  },
+};
