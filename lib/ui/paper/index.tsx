@@ -1,9 +1,9 @@
-import { Paper } from "@mui/material";
+import { Paper, SxProps } from "@mui/material";
 import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
-  sx?: object;
+  sx?: SxProps;
 };
 
 export const AppPaper = ({ children, sx }: Props) => {

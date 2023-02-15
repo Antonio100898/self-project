@@ -16,8 +16,8 @@ export const ImageBox = (props: Props) => {
 
   const sizes = {
     lg: {
-      width: 600,
-      height: 600,
+      width: { xs: '100%', md: 600 },
+      height: 400,
     },
     md: {
       width: 400,
@@ -30,8 +30,8 @@ export const ImageBox = (props: Props) => {
   };
 
   const [imageSize, setImageSize] = useState<{
-    width: string | number;
-    height: string | number;
+    width: string | number | object;
+    height: string | number | object;
   }>(sizes.lg);
 
   useEffect(() => {
@@ -51,7 +51,15 @@ export const ImageBox = (props: Props) => {
   }, [size]);
 
   return (
-    <Box sx={{width: imageSize.width, height: imageSize.height, position: "relative", ...sx }}>
+    <Box
+      sx={{
+        width: imageSize.width,
+        height: imageSize.height,
+        position: "relative",
+        marginY: 2,
+        ...sx,
+      }}
+    >
       <Image style={{ objectFit: "contain" }} fill src={src} alt={alt} />
     </Box>
   );
