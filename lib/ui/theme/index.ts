@@ -40,6 +40,8 @@ export const THEME = (dark: boolean, primaryColor: string) => {
           root: {
             padding: "0 4% !important",
             minHeight: 64,
+            display: 'flex',
+            justifyContent: 'space-between'
           },
         },
       },

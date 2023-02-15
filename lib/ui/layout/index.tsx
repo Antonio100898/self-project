@@ -18,10 +18,10 @@ type Props = {
   isDarkTheme: boolean;
   themeToggle: () => void;
   navItems?: NavItem[] | null;
-  name?: string
+  name?: string;
 };
 
-export function Layout(props: Props) {
+export function WebPageLayout(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const { children, isDarkTheme, themeToggle, navItems, name } = props;
@@ -50,7 +50,7 @@ export function Layout(props: Props) {
       }}
     >
       <AppBar component="nav">
-        <Toolbar>
+        <Toolbar sx={{justifyContent: {xs: 'flex-start', sm: 'space-between'}}}>
           <IconButton
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
@@ -62,7 +62,6 @@ export function Layout(props: Props) {
             component="div"
             sx={{
               minWidth: "fit-content",
-              flexGrow: 1,
               color: black,
               fontSize: { xs: 22, lg: 28 },
               fontWeight: "bold",
@@ -76,7 +75,6 @@ export function Layout(props: Props) {
                 xs: "none",
                 sm: "flex",
                 justifyContent: "space-between",
-                width: "70%",
               },
             }}
           >
@@ -87,9 +85,8 @@ export function Layout(props: Props) {
                   key={item.label}
                   sx={{
                     color: black,
-                    fontSize: 18,
+                    fontSize: { sm: 16, md: 18 },
                     letterSpacing: 2,
-                    height: "100%",
                     gap: { s: 0.8, md: 1 },
                     borderRadius: 2,
                   }}
@@ -98,10 +95,10 @@ export function Layout(props: Props) {
                 </Button>
               ))}
             </Box>
-            <IconButton onClick={themeToggle}>
-              {isDarkTheme ? <DarkModeIcon /> : <LightModeIcon />}
-            </IconButton>
           </Box>
+          <IconButton sx={{display: {sm: "block", xs: "none"}}} onClick={themeToggle}>
+            {isDarkTheme ? <DarkModeIcon /> : <LightModeIcon />}
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
