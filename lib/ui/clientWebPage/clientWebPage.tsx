@@ -5,6 +5,7 @@ import {
   themeRegular,
   ImageBox,
   SocialMediaLinks,
+  SocialMedia,
 } from "@/lib/ui";
 import { AppSection } from "@/lib/ui/section";
 import { ThemeProvider } from "@mui/material";
@@ -38,6 +39,24 @@ export const ClientWebPage = (props: Props) => {
     if (!isDarkTheme) setIsDarkTheme(true);
   };
 
+  const links = [
+    {
+      href: "https://www.instagram.com/",
+      altStringIcon: "instagram_icon",
+      socialMedia: "instagram",
+    },
+    {
+      href: "https://www.facebook.com/",
+      altStringIcon: "facebook_icon",
+      socialMedia: "facebook" as SocialMedia,
+    },
+    {
+      href: "https://www.whatsapp.com/",
+      altStringIcon: "whatsapp_icon",
+      socialMedia: "whatsapp" as SocialMedia,
+    }
+  ];
+
   return (
     <ThemeProvider theme={themeRegular}>
       <ThemeProvider
@@ -59,7 +78,7 @@ export const ClientWebPage = (props: Props) => {
             </AppSection>
           ))}
           <AppSection header="CONTACT" id="contact">
-            <SocialMediaLinks />
+            <SocialMediaLinks socialMediaLinks={links} />
           </AppSection>
         </WebPageLayout>
       </ThemeProvider>

@@ -61,7 +61,7 @@ export function WebPageLayout(props: Props) {
             variant="h4"
             component="div"
             sx={{
-              minWidth: "fit-content",
+              width: {md:300},
               color: black,
               fontSize: { xs: 22, lg: 28 },
               fontWeight: "bold",
@@ -96,9 +96,11 @@ export function WebPageLayout(props: Props) {
               ))}
             </Box>
           </Box>
+          <Box sx={{width: {md:300}, display: 'flex', justifyContent: 'flex-end'}}>
           <IconButton sx={{display: {sm: "block", xs: "none"}}} onClick={themeToggle}>
             {isDarkTheme ? <DarkModeIcon /> : <LightModeIcon />}
           </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer

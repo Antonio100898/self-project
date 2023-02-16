@@ -1,24 +1,27 @@
-import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Button, List, ListItem, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import { AppPaper } from "../../paper";
+
+export type SocialMedia =
+  | "instagram"
+  | "facebook"
+  | "soundcloud"
+  | "twitter"
+  | "vk"
+  | "telegram";
 
 type Props = {
   socialMediaLinks: {
     href: string;
-    iconPath: string;
     altStringIcon: string;
-    socialMedia:
-      | "instagram"
-      | "facebook"
-      | "soundcloud"
-      | "twitter"
-      | "vk"
-      | "telegram";
+    socialMedia: SocialMedia;
   }[];
 };
 
 export const SocialMediaLinks = (props: Props) => {
   const { socialMediaLinks } = props;
+
+  const theme = useTheme();
 
   return (
     <AppPaper
@@ -30,17 +33,20 @@ export const SocialMediaLinks = (props: Props) => {
     >
       <List>
         {socialMediaLinks.map((link) => (
-          <ListItem>
-            <ListItemIcon>
-              <Image
-                src={`/${link.iconPath}.png`}
-                alt={link.altStringIcon}
-                width={40}
-                height={40}
-              />
-            </ListItemIcon>
-            <ListItemText>{link.href}</ListItemText>
-          </ListItem>
+          <a style={{ textDecoration: "none" }} href={link.href}>
+            <ListItem>
+              <Button sx={{ borderRadius: 2, gap: 2, color: theme.palette.text.primary }}>
+                <Image
+                  src={`/${link.socialMedia}.png`}
+                  alt={link.altStringIcon}
+                  width={40}
+                  height={40}
+                />
+
+                {link.socialMedia}
+              </Button>
+            </ListItem>
+          </a>
         ))}
       </List>
     </AppPaper>
