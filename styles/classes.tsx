@@ -14,10 +14,12 @@ export const classes = {
     justifyContent: "space-between",
   },
   sectionHeader: {
+    position: 'relative',
     textAlign: 'center',
     letterSpacing: 2,
     fontSize: 30,
     fontWeight: 'bold',
-    mb: 2
+    mb: 6,
+    mt: 2
   }
 };

@@ -6,6 +6,7 @@ import {
   ImageBox,
   SocialMediaLinks,
   SocialMedia,
+  MainSection,
 } from "@/lib/ui";
 import { AppSection } from "@/lib/ui/section";
 import { ThemeProvider } from "@mui/material";
@@ -43,7 +44,7 @@ export const ClientWebPage = (props: Props) => {
     {
       href: "https://www.instagram.com/",
       altStringIcon: "instagram_icon",
-      socialMedia: "instagram",
+      socialMedia: "instagram" as SocialMedia,
     },
     {
       href: "https://www.facebook.com/",
@@ -68,8 +69,10 @@ export const ClientWebPage = (props: Props) => {
           themeToggle={themeToggle}
           isDarkTheme={isDarkTheme}
         >
+          <MainSection></MainSection>
           {sections?.map((section) => (
             <AppSection
+            isDarkTheme={isDarkTheme}
               header={section.header}
               id={section.header?.toLowerCase()}
             >

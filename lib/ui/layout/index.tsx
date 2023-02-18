@@ -7,7 +7,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { black } from "../theme";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { AppDrawer } from "../drawer";
 import Button from "@mui/material/Button";
@@ -50,21 +49,24 @@ export function WebPageLayout(props: Props) {
       }}
     >
       <AppBar component="nav">
-        <Toolbar sx={{justifyContent: {xs: 'flex-start', sm: 'space-between'}}}>
+        <Toolbar
+          sx={{ justifyContent: { xs: "flex-start", sm: "space-between" } }}
+        >
           <IconButton
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: theme.palette.secondary.light }} />
           </IconButton>
           <Typography
+            onClick={() => onNavClick("main-section")}
             variant="h4"
             component="div"
             sx={{
-              width: {md:300},
-              color: black,
+              width: { md: 300 },
               fontSize: { xs: 22, lg: 28 },
               fontWeight: "bold",
+              cursor: "pointer"
             }}
           >
             {name}
@@ -84,11 +86,11 @@ export function WebPageLayout(props: Props) {
                   onClick={() => onNavClick(item.href)}
                   key={item.label}
                   sx={{
-                    color: black,
                     fontSize: { sm: 16, md: 18 },
                     letterSpacing: 2,
                     gap: { s: 0.8, md: 1 },
                     borderRadius: 2,
+                    color: "inherit",
                   }}
                 >
                   {item.label}
@@ -96,10 +98,23 @@ export function WebPageLayout(props: Props) {
               ))}
             </Box>
           </Box>
-          <Box sx={{width: {md:300}, display: 'flex', justifyContent: 'flex-end'}}>
-          <IconButton sx={{display: {sm: "block", xs: "none"}}} onClick={themeToggle}>
-            {isDarkTheme ? <DarkModeIcon /> : <LightModeIcon />}
-          </IconButton>
+          <Box
+            sx={{
+              width: { md: 300 },
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <IconButton
+              sx={{ display: { sm: "block", xs: "none" } }}
+              onClick={themeToggle}
+            >
+              {isDarkTheme ? (
+                <DarkModeIcon color="secondary" />
+              ) : (
+                <LightModeIcon color="secondary" />
+              )}
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>

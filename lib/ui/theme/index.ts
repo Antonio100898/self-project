@@ -9,9 +9,8 @@ export const drawerWidth = 240;
 export const themeRegular = createTheme({});
 
 export const THEME = (dark: boolean, primaryColor: string) => {
-  const tan = primaryColor;
-  const paperColorDark = "#696969";
-  const paperColorLight = "#ebebeb";
+  const paperColorDark = "rgba(105, 105, 105, 0.46)";
+  const paperColorLight = "rgba(235, 235, 235, 0.46)";
 
   return createTheme({
     palette: {
@@ -23,18 +22,23 @@ export const THEME = (dark: boolean, primaryColor: string) => {
         primary: dark ? white : black,
       },
       primary: {
-        main: tan,
+        main: primaryColor,
       },
+      secondary: {
+        main: "#c9be9f",
+        light: white
+      },
+      
     },
     components: {
       MuiAppBar: {
         styleOverrides: {
           root: {
-            backgroundColor: tan,
             height: appBarHeight,
           },
         },
       },
+
       MuiToolbar: {
         styleOverrides: {
           root: {
@@ -42,6 +46,7 @@ export const THEME = (dark: boolean, primaryColor: string) => {
             minHeight: 64,
             display: "flex",
             justifyContent: "space-between",
+            color: white
           },
         },
       },
@@ -57,9 +62,7 @@ export const THEME = (dark: boolean, primaryColor: string) => {
       MuiDivider: {
         styleOverrides: {
           root: {
-            backgroundColor: tan,
-            padding: 0,
-            margin: 0,
+            backgroundColor: primaryColor
           },
         },
       },
