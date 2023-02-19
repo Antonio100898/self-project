@@ -74,11 +74,10 @@ export function WebPageLayout(props: Props) {
               display: {
                 xs: "none",
                 sm: "flex",
-                justifyContent: "space-between",
               },
             }}
           >
-            <Box sx={{ display: "flex", gap: { md: 1 } }}>
+            <Box sx={{ gap: {sm: 3, md: 6}, display: 'flex'}}>
               {props.navItems?.map((item) => (
                 <Button
                   onClick={() => onNavClick(item.href)}
@@ -86,7 +85,6 @@ export function WebPageLayout(props: Props) {
                   sx={{
                     fontSize: { sm: 16, md: 18 },
                     letterSpacing: 2,
-                    gap: { s: 0.8, md: 1 },
                     borderRadius: 2,
                     color: "inherit",
                   }}

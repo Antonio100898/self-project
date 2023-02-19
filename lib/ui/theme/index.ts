@@ -11,6 +11,8 @@ export const themeRegular = createTheme({});
 export const THEME = (dark: boolean, primaryColor: string) => {
   const paperColorDark = "rgba(105, 105, 105, 0.46)";
   const paperColorLight = "rgba(235, 235, 235, 0.46)";
+  const drawerDarkColor = "linear-gradient(180deg, rgba(69,69,69,1) 50%, rgba(227,227,227,1) 100%)"
+  const drawerLightColor = "linear-gradient(180deg, rgba(227,227,227,1) 50%, rgba(69,69,69,1) 100%)"
 
   return createTheme({
     palette: {
@@ -53,7 +55,7 @@ export const THEME = (dark: boolean, primaryColor: string) => {
       MuiDrawer: {
         styleOverrides: {
           paper: {
-            backgroundColor: dark ? black : white,
+            background: dark ? drawerDarkColor : drawerLightColor,
             boxSizing: "border-box",
             width: drawerWidth,
           },
