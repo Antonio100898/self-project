@@ -8,7 +8,7 @@ type Props = {
 
 export const AppPaper = ({ children, sx }: Props) => {
   return (
-    <Paper sx={{ padding: 2, backdropFilter: "blur(7.6px)", ...sx }}>
+    <Paper sx={{ padding: 2, backdropFilter: "blur(5px)", ...sx }}>
       {children}
     </Paper>
   );

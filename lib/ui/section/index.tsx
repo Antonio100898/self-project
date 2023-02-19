@@ -7,7 +7,7 @@ type Props = {
   header?: string;
   children?: ReactNode;
   id?: string;
-  isDarkTheme?: boolean
+  isDarkTheme?: boolean;
 };
 
 export const AppSection = (props: Props) => {
@@ -23,15 +23,15 @@ export const AppSection = (props: Props) => {
               top: "50%",
               left: "50%",
               translate: "-50% -50%",
-              backgroundColor: isDarkTheme? black : white,
-              paddingX: 2,
+              backgroundColor: isDarkTheme ? black : white,
+              px: 2,
             }}
           >
             {header}
           </Box>
           <Divider></Divider>
         </Box>
-        {children}
+        <Box sx={{px: {xs: 2, sm: 4}}}>{children}</Box>
       </section>
     </>
   );

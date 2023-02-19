@@ -11,19 +11,18 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import { AppDrawer } from "../drawer";
 import Button from "@mui/material/Button";
 import { NavItem } from "@/lib/api/models";
+import { MainSection } from "../mainSection";
 
 type Props = {
   children: ReactNode;
   isDarkTheme: boolean;
   themeToggle: () => void;
   navItems?: NavItem[] | null;
-  name?: string;
+  name: string
 };
 
 export function WebPageLayout(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const { children, isDarkTheme, themeToggle, navItems, name } = props;
 
   const theme = useTheme();
 
@@ -64,12 +63,11 @@ export function WebPageLayout(props: Props) {
             component="div"
             sx={{
               width: { md: 300 },
-              fontSize: { xs: 22, lg: 28 },
               fontWeight: "bold",
               cursor: "pointer"
             }}
           >
-            {name}
+            Portfolio
           </Typography>
           <Box
             sx={{
@@ -81,7 +79,7 @@ export function WebPageLayout(props: Props) {
             }}
           >
             <Box sx={{ display: "flex", gap: { md: 1 } }}>
-              {navItems?.map((item) => (
+              {props.navItems?.map((item) => (
                 <Button
                   onClick={() => onNavClick(item.href)}
                   key={item.label}
@@ -107,9 +105,9 @@ export function WebPageLayout(props: Props) {
           >
             <IconButton
               sx={{ display: { sm: "block", xs: "none" } }}
-              onClick={themeToggle}
+              onClick={props.themeToggle}
             >
-              {isDarkTheme ? (
+              {props.isDarkTheme ? (
                 <DarkModeIcon color="secondary" />
               ) : (
                 <LightModeIcon color="secondary" />
@@ -130,25 +128,26 @@ export function WebPageLayout(props: Props) {
         }}
       >
         <AppDrawer
+          name={props.name}
           onNavClick={onNavClick}
           handleDrawerToggle={handleDrawerToggle}
-          isDarkTheme={isDarkTheme}
-          navItems={navItems}
-          themeToggle={themeToggle}
+          isDarkTheme={props.isDarkTheme}
+          navItems={props.navItems}
+          themeToggle={props.themeToggle}
         />
       </Drawer>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          p: "0 4%",
           fontFamily: "roboto",
           width: "100%",
         }}
       >
+         <MainSection name={props.name} />
         <Box component="main">
           <Toolbar />
-          {children}
+          {props.children}
         </Box>
         <Box>FOOTER</Box>
       </Box>

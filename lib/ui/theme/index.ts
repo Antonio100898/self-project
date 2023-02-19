@@ -62,7 +62,7 @@ export const THEME = (dark: boolean, primaryColor: string) => {
       MuiDivider: {
         styleOverrides: {
           root: {
-            backgroundColor: primaryColor
+            backgroundColor: dark? white : primaryColor
           },
         },
       },

@@ -22,40 +22,35 @@ type Props = {
   themeToggle: () => void;
   handleDrawerToggle: () => void;
   onNavClick: (route: string) => void;
+  name: string
 };
 
-export const AppDrawer = ({
-  navItems,
-  isDarkTheme,
-  themeToggle,
-  handleDrawerToggle,
-  onNavClick,
-}: Props) => {
+export const AppDrawer = (props: Props) => {
 
   const onDrawerNavClick = (route: string) => {
-    onNavClick(route);
-    handleDrawerToggle();
+    props.onNavClick(route);
+    props.handleDrawerToggle();
   };
 
   return (
     <Box sx={{ textAlign: "center" }}>
       <Box sx={classes.drawerHead}>
-        <Typography variant="h6">Menu</Typography>
+        <Typography onClick={() => onDrawerNavClick("main-section")} variant="h6" fontSize={18}>{props.name}</Typography>
         <IconButton
           sx={{
             position: "absolute",
             right: 2,
-            color: isDarkTheme ? white : black,
+            color: props.isDarkTheme ? white : black,
           }}
-          onClick={handleDrawerToggle}
+          onClick={props.handleDrawerToggle}
         >
-          <CloseIcon />
+          <CloseIcon sx={{width: 20}}/>
         </IconButton>
       </Box>
       <Divider />
       <Box sx={classes.drawerBody}>
         <List>
-          {navItems?.map((item) => (
+          {props.navItems?.map((item) => (
             <ListItem
               onClick={() => onDrawerNavClick(item.href)}
               key={item.label}
@@ -73,11 +68,11 @@ export const AppDrawer = ({
           <Divider sx={{ mb: 4 }} />
           <ListItem sx={{ justifyContent: "center" }} disablePadding>
             <LightModeIcon
-              sx={{ visibility: isDarkTheme ? "hidden" : "visible" }}
+              sx={{ visibility: props.isDarkTheme ? "hidden" : "visible" }}
             />
-            <Switch checked={isDarkTheme} onChange={themeToggle} />
+            <Switch checked={props.isDarkTheme} onChange={props.themeToggle} />
             <DarkModeIcon
-              sx={{ visibility: isDarkTheme ? "visible" : "hidden" }}
+              sx={{ visibility: props.isDarkTheme ? "visible" : "hidden" }}
             />
           </ListItem>
         </Box>

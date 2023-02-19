@@ -55,36 +55,39 @@ export const ClientWebPage = (props: Props) => {
       href: "https://www.whatsapp.com/",
       altStringIcon: "whatsapp_icon",
       socialMedia: "whatsapp" as SocialMedia,
-    }
+    },
   ];
 
-  return (
-    <ThemeProvider theme={themeRegular}>
-      <ThemeProvider
-        theme={() => THEME(isDarkTheme, userWebData.palette.primaryColor)}
-      >
-        <WebPageLayout
-          name={client?.name}
-          navItems={navItems}
-          themeToggle={themeToggle}
-          isDarkTheme={isDarkTheme}
+  if (client) {
+    return (
+      <ThemeProvider theme={themeRegular}>
+        <ThemeProvider
+          theme={() => THEME(isDarkTheme, userWebData.palette.primaryColor)}
         >
-          <MainSection></MainSection>
-          {sections?.map((section) => (
-            <AppSection
+          <WebPageLayout
+            name={client.name}
+            navItems={navItems}
+            themeToggle={themeToggle}
             isDarkTheme={isDarkTheme}
-              header={section.header}
-              id={section.header?.toLowerCase()}
-            >
-              <AppPaper>{section.content?.paragraph}</AppPaper>
-              <ImageBox src="/djImage1.jpg" alt="image_test" />
+          >
+            {sections?.map((section) => (
+              <AppSection
+                isDarkTheme={isDarkTheme}
+                header={section.header}
+                id={section.header?.toLowerCase()}
+              >
+                <AppPaper>{section.content?.paragraph}</AppPaper>
+                <ImageBox src="/djImage1.jpg" alt="image_test" />
+              </AppSection>
+            ))}
+            <AppSection isDarkTheme={isDarkTheme} header="CONTACT" id="contact">
+              <SocialMediaLinks socialMediaLinks={links} />
             </AppSection>
-          ))}
-          <AppSection header="CONTACT" id="contact">
-            <SocialMediaLinks socialMediaLinks={links} />
-          </AppSection>
-        </WebPageLayout>
+          </WebPageLayout>
+        </ThemeProvider>
       </ThemeProvider>
-    </ThemeProvider>
-  );
+    );
+  } else {
+    return <>wait a moment...</>;
+  }
 };
