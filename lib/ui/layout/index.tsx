@@ -19,6 +19,7 @@ type Props = {
   themeToggle: () => void;
   navItems?: NavItem[] | null;
   name: string
+  avatar: string
 };
 
 export function WebPageLayout(props: Props) {
@@ -142,7 +143,7 @@ export function WebPageLayout(props: Props) {
           width: "100%",
         }}
       >
-         <MainSection name={props.name} />
+         <MainSection avatar={props.avatar} name={props.name} />
         <Box component="main">
           <Toolbar />
           {props.children}

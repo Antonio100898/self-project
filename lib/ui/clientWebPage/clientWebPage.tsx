@@ -6,7 +6,6 @@ import {
   ImageBox,
   SocialMediaLinks,
   SocialMedia,
-  MainSection,
 } from "@/lib/ui";
 import { AppSection } from "@/lib/ui/section";
 import { ThemeProvider } from "@mui/material";
@@ -25,6 +24,7 @@ export const ClientWebPage = (props: Props) => {
   const [sections, setSections] = useState<Section[] | null>(null);
   const [navItems, setNavItems] = useState<NavItem[] | null>(null);
   const [client, setClient] = useState<IUserInfo | null>(null);
+  const [avatar, setAvatar] = useState("")
 
   const { userInfo, userWebData } = props.userData;
 
@@ -32,6 +32,7 @@ export const ClientWebPage = (props: Props) => {
     setClient(userInfo);
     setSections(userWebData.sections);
     setNavItems(userWebData.navItems);
+    setAvatar(userWebData.avatar)
   }, [props]);
 
   //changing theme of the page (dark/light)
@@ -65,6 +66,7 @@ export const ClientWebPage = (props: Props) => {
           theme={() => THEME(isDarkTheme, userWebData.palette.primaryColor)}
         >
           <WebPageLayout
+            avatar={avatar}
             name={client.name}
             navItems={navItems}
             themeToggle={themeToggle}

@@ -5,6 +5,7 @@ export interface IUserWebData {
   palette: {
     primaryColor: string
   }
+  avatar: string
 }
 
 export type NavItem = {

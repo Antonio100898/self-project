@@ -4,6 +4,7 @@ import Image from "next/image";
 
 type Props = {
   name: string;
+  avatar: string
 };
 
 export const MainSection = (props: Props) => {
@@ -22,20 +23,14 @@ export const MainSection = (props: Props) => {
             alignItems: "center",
             position: "absolute",
             zIndex: 100,
-            bottom: { xs: -60, md: -80 },
+            bottom: { xs: -20, md: -40 },
             left: "4%",
           }}
         >
           <Avatar
-            sx={{ width: { xs: 200, md: 300 }, height: { xs: 200, md: 300 } }}
+            src={props.avatar}
+            sx={{ width: { xs: 120, md: 200 }, height: { xs: 120, md: 200 } }}
           />
-          <Typography
-            variant="h4"
-            fontSize={{ xs: 24, md: 36 }}
-            fontWeight="bold"
-          >
-            {props.name}
-          </Typography>
         </Box>
         <Image
           src="/djImage1.jpg"
@@ -43,6 +38,15 @@ export const MainSection = (props: Props) => {
           fill
           style={{ objectFit: "cover" }}
         />
+      </Box>
+      <Box sx={{ px: "4%", pt: { xs: 3, md: 6 } }}>
+        <Typography
+          variant="h4"
+          fontSize={{ xs: 24, md: 36 }}
+          fontWeight="bold"
+        >
+          {props.name}
+        </Typography>
       </Box>
     </section>
   );
