@@ -3,36 +3,39 @@ import {
   WebPageLayout,
   THEME,
   themeRegular,
-  ImageBox,
   SocialMediaLinks,
-  SocialMedia,
 } from "@/lib/ui";
 import { AppSection } from "@/lib/ui/section";
 import { ThemeProvider } from "@mui/material";
 import { useState, useEffect } from "react";
 import { IUserInfo, IUserWebData, NavItem, Section } from "@/lib/api/models";
+import { IContactLink } from "@/lib/api/models/user-contacts-model";
 
 type Props = {
   userData: {
     userInfo: IUserInfo;
     userWebData: IUserWebData;
+    contacts: IContactLink[];
   };
 };
+
 export const ClientWebPage = (props: Props) => {
   //state of the app
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [sections, setSections] = useState<Section[] | null>(null);
   const [navItems, setNavItems] = useState<NavItem[] | null>(null);
   const [client, setClient] = useState<IUserInfo | null>(null);
-  const [avatar, setAvatar] = useState("")
+  const [avatar, setAvatar] = useState("");
+  const [links, setLinks] = useState<IContactLink[] | null>(null);
 
-  const { userInfo, userWebData } = props.userData;
+  const { userInfo, userWebData, contacts } = props.userData;
 
   useEffect(() => {
     setClient(userInfo);
     setSections(userWebData.sections);
     setNavItems(userWebData.navItems);
-    setAvatar(userWebData.avatar)
+    setAvatar(userWebData.avatar);
+    setLinks(contacts);
   }, [props]);
 
   //changing theme of the page (dark/light)
@@ -41,31 +44,14 @@ export const ClientWebPage = (props: Props) => {
     if (!isDarkTheme) setIsDarkTheme(true);
   };
 
-  const links = [
-    {
-      href: "https://www.instagram.com/",
-      altStringIcon: "instagram_icon",
-      socialMedia: "instagram" as SocialMedia,
-    },
-    {
-      href: "https://www.facebook.com/",
-      altStringIcon: "facebook_icon",
-      socialMedia: "facebook" as SocialMedia,
-    },
-    {
-      href: "https://www.whatsapp.com/",
-      altStringIcon: "whatsapp_icon",
-      socialMedia: "whatsapp" as SocialMedia,
-    },
-  ];
-
-  if (client) {
+  if (client && links) {
     return (
       <ThemeProvider theme={themeRegular}>
         <ThemeProvider
           theme={() => THEME(isDarkTheme, userWebData.palette.primaryColor)}
         >
           <WebPageLayout
+            activities={client.activities}
             avatar={avatar}
             name={client.name}
             navItems={navItems}
@@ -79,7 +65,6 @@ export const ClientWebPage = (props: Props) => {
                 id={section.header?.toLowerCase()}
               >
                 <AppPaper>{section.content?.paragraph}</AppPaper>
-                <ImageBox src="/djImage1.jpg" alt="image_test" />
               </AppSection>
             ))}
             <AppSection isDarkTheme={isDarkTheme} header="CONTACT" id="contact">

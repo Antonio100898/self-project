@@ -1,5 +1,6 @@
 import { ApiService } from "@/lib/api/api-service";
 import { IUserInfo, IUserWebData } from "@/lib/api/models";
+import { IContactLink } from "@/lib/api/models/user-contacts-model";
 import { ClientWebPage } from "@/lib/ui/clientWebPage";
 
 export async function getServerSideProps({ query }: any) {
@@ -20,6 +21,7 @@ export async function getServerSideProps({ query }: any) {
       userData: {
         userInfo: response?.data.data.userInfo,
         userWebData: response?.data.data.userWebData,
+        contacts: response?.data.data.contacts
       },
     },
   };
@@ -29,6 +31,7 @@ type Props = {
   userData: {
     userInfo: IUserInfo;
     userWebData: IUserWebData;
+    contacts: IContactLink[]
   };
 };
 

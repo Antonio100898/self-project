@@ -8,9 +8,9 @@ export const fetchUserData = async (
   let userData;
 
   try {
-    const { clientID } = _req.query;
-    if (clientID) {
-      userData = await getUserData(Number(clientID));
+    const { url_nickname } = _req.query;
+    if (url_nickname) {
+      userData = await getUserData(url_nickname.toString());
     }
     if (!userData) return res.status(404).json({ error: true, message: "Requested page does not exists" });
     

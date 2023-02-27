@@ -1,4 +1,5 @@
-import { Button, List, ListItem, Typography, useTheme } from "@mui/material";
+import { IContactLink } from "@/lib/api/models/user-contacts-model";
+import { Button, List, ListItem, useTheme } from "@mui/material";
 import Image from "next/image";
 import { AppPaper } from "../../paper";
 
@@ -11,11 +12,7 @@ export type SocialMedia =
   | "telegram";
 
 type Props = {
-  socialMediaLinks: {
-    href: string;
-    altStringIcon: string;
-    socialMedia: SocialMedia;
-  }[];
+  socialMediaLinks: IContactLink[]
 };
 
 export const SocialMediaLinks = (props: Props) => {
@@ -33,12 +30,12 @@ export const SocialMediaLinks = (props: Props) => {
     >
       <List>
         {socialMediaLinks.map((link) => (
-          <a style={{ textDecoration: "none" }} href={link.href}>
+          <a style={{ textDecoration: "none" }} href={link.href} target="_blank">
             <ListItem>
               <Button sx={{ borderRadius: 2, gap: 2, color: theme.palette.text.primary }}>
                 <Image
                   src={`/${link.socialMedia}.png`}
-                  alt={link.altStringIcon}
+                  alt={link.socialMedia}
                   width={40}
                   height={40}
                 />

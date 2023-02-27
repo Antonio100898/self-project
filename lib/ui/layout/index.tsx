@@ -20,6 +20,7 @@ type Props = {
   navItems?: NavItem[] | null;
   name: string
   avatar: string
+  activities: string[]
 };
 
 export function WebPageLayout(props: Props) {
@@ -143,12 +144,10 @@ export function WebPageLayout(props: Props) {
           width: "100%",
         }}
       >
-         <MainSection avatar={props.avatar} name={props.name} />
+         <MainSection activities={props.activities} avatar={props.avatar} name={props.name} />
         <Box component="main">
-          <Toolbar />
           {props.children}
         </Box>
-        <Box>FOOTER</Box>
       </Box>
     </Box>
   );

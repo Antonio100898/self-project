@@ -3,5 +3,5 @@ export interface IUserInfo {
   age: number;
   email: string;
   phone: string;
-  activity: string;
+  activities: string[];
 }

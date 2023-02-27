@@ -1,10 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Image from "next/image";
+import { Activities } from "../components";
 
 type Props = {
   name: string;
-  avatar: string
+  avatar: string;
+  activities: string[];
 };
 
 export const MainSection = (props: Props) => {
@@ -47,6 +49,7 @@ export const MainSection = (props: Props) => {
         >
           {props.name}
         </Typography>
+        <Activities activities={props.activities}/>
       </Box>
     </section>
   );
