@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const ClientWebPage = (props: Props) => {
-  //state of the app
+  //state of the client web page
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [sections, setSections] = useState<Section[] | null>(null);
   const [navItems, setNavItems] = useState<NavItem[] | null>(null);
@@ -48,7 +48,7 @@ export const ClientWebPage = (props: Props) => {
     return (
       <ThemeProvider theme={themeRegular}>
         <ThemeProvider
-          theme={() => THEME(isDarkTheme, userWebData.palette.primaryColor)}
+          theme={() => THEME(isDarkTheme, userWebData.palette.primaryColor)} //THEME function accepts darkmode boolean and all color settings choosed by user in admin app, and creates theme
         >
           <WebPageLayout
             activities={client.activities}

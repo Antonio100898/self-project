@@ -1,4 +1,4 @@
-export * from "./layout"
+export * from "./layout/webPageLayout"
 export * from "./theme"
 export * from "./paper"
 export * from "./components/"

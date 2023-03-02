@@ -4,10 +4,10 @@ import { IContactLink } from "@/lib/api/models/user-contacts-model";
 import { ClientWebPage } from "@/lib/ui/clientWebPage";
 
 export async function getServerSideProps({ query }: any) {
-  const response = await ApiService.fetchUserById(query.clientID); //initial request for the page of the user (by userid/username provided as query (query.clientID))
+  const response = await ApiService.fetchUser(query.clientID); //initial request for the page of the user (by userid/username provided as query (query.clientID))
 
   if (!response?.data.data) {
-    //if api service didnt return response.data.data, means that page of the provided user doesnt exist
+    //if api service didnt return response.data.data, means that page of the requested user doesnt exist
     return {
       redirect: {
         permanent: true,
@@ -15,7 +15,7 @@ export async function getServerSideProps({ query }: any) {
       },
     };
   }
-  // if response.data.data exists so we put this to props of the page
+  // if response.data.data exists so we put this to the props of the page
   return {
     props: {
       userData: {
